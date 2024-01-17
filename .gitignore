@@ -1,0 +1,6 @@
+READMEoooo.md
+environments/development/.terraform
+environments/development/.terraform.lock.hcl
+environments/development/.terraformignore
+environments/development/terraform.tfstate.backup
+environments/development/terraform.tfstate

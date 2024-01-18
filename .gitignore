@@ -1,3 +1,4 @@
+.DS_Store
 READMEoooo.md
 environments/development/.terraform
 environments/development/.terraform.lock.hcl

@@ -48,10 +48,27 @@ module "web_server" { # [key_pair, ec2's]
   module.security_group.web_server_sg]
 }
 
-module "alb" {
-  source     = "../../modules/alb"
+# module "alb" {
+#   source     = "../../modules/alb"
+#   env_prefix = var.env_prefix
+
+#   security_groups = [module.security_group.alb_sg]
+#   subnets         = [module.subnet.public_sub_az1, module.subnet.public_sub_az2]
+# }
+
+# https://docs.localstack.cloud/references/coverage/coverage_elbv2/
+
+# Elastic Load Balancer v2 (ELB v2) is supported by LocalStack
+# only in the pro version.
+
+module "db" {
+  source     = "../../modules/db"
   env_prefix = var.env_prefix
 
-  security_groups = [module.security_group.alb_sg]
-  subnets         = [module.subnet.public_sub_az1, module.subnet.public_sub_az2]
+  db_username        = var.db_username
+  db_password        = var.db_password
+  availability_zones = var.availability_zones
+
+  # db_sub_group       = module.subnet.db_sub_group
+  security_groups = [module.security_group.db_sg]
 }

@@ -18,3 +18,6 @@ img_name = "amzn2-ami-*-gp2"
 instance_type = "t2.micro"
 public_key_location = "~/.ssh/id_rsa.pub"
 private_key_location = "~/.ssh/id_rsa"
+
+db_username = "username"
+db_password = "password"

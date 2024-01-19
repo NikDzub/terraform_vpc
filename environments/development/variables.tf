@@ -12,3 +12,6 @@ variable "private_key_location" {}
 
 variable "img_name" {}
 variable "instance_type" {}
+
+variable "db_username" {}
+variable "db_password" {}

@@ -118,3 +118,17 @@ resource "aws_nat_gateway" "nat_gw_az2" {
     Name = "nat_gw_az_2"
   }
 }
+
+##############################################################
+
+# resource "aws_db_subnet_group" "db_sub_group" {
+#   name        = "${var.env_prefix}_db_subnets"
+#   subnet_ids  = [aws_subnet.private_data_sub_az1.id, aws_subnet.private_data_sub_az2.id]
+#   description = "subnets for db instance"
+
+#   tags = {
+#     Name = "${var.env_prefix}_db_subnets"
+#   }
+# }
+# Error: creating RDS DB Subnet Group (dev_db_subnets): InternalFailure: API for service 'rds' not yet implemented or pro feature - please check https://docs.localstack.cloud/references/coverage/ for further information
+# Relational Database Service (RDS) is supported by LocalStack only in the pro version.

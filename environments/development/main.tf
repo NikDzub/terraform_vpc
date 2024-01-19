@@ -44,5 +44,14 @@ module "web_server" { # [key_pair, ec2's]
 
   private_app_sub_az1 = module.subnet.private_app_sub_az1
   private_app_sub_az2 = module.subnet.private_app_sub_az2
-  security_groups     = [module.security_group.alb_sg]
+  security_groups = [module.security_group.alb_sg,
+  module.security_group.web_server_sg]
+}
+
+module "alb" {
+  source     = "../../modules/alb"
+  env_prefix = var.env_prefix
+
+  security_groups = [module.security_group.alb_sg]
+  subnets         = [module.subnet.public_sub_az1, module.subnet.public_sub_az2]
 }

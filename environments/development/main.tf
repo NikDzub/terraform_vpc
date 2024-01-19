@@ -24,14 +24,16 @@ module "subnet" { # [pub/priv_subs, rt_associs, eip, nat_gw]
   private_sub_cidr_blocks = var.private_sub_cidr_blocks
 }
 
-module "security_group" {
+module "security_group" { # [alb_sg, ssh_sg]
   source     = "../../modules/security_group"
   env_prefix = var.env_prefix
 
   vpc_id = module.vpc.vpc_id
+  vpc    = module.vpc.vpc
+  my_ip  = var.my_ip
 }
 
-module "web_server" {
+module "web_server" { # [key_pair, ec2's]
   source     = "../../modules/web_server"
   env_prefix = var.env_prefix
 

@@ -1,5 +1,6 @@
 variable "env_prefix" {}
 variable "region" {}
+variable "my_ip" {}
 variable "vpc_cidr_block" {}
 
 variable "availability_zones" {}

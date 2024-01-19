@@ -1,7 +1,8 @@
 env_prefix = "dev"
 region = "us-east-1"
+my_ip = "0.0.0.0"
 
-availability_zones = ["us-east-1b","us-east-2b"]
+availability_zones = ["us-east-1b","us-east-1c"]
 vpc_cidr_block = "10.0.0.0/16"
 
 public_sub_cidr_blocks = [

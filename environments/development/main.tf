@@ -42,24 +42,19 @@ module "web_server" { # [key_pair, ec2's]
   availability_zones  = var.availability_zones
   public_key_location = var.public_key_location
 
-  private_app_sub_az1 = module.subnet.private_app_sub_az1
-  private_app_sub_az2 = module.subnet.private_app_sub_az2
-  security_groups = [module.security_group.alb_sg,
-  module.security_group.web_server_sg]
+  private_app_subs = [module.subnet.private_app_sub_az1, module.subnet.private_app_sub_az2]
+  security_groups  = [module.security_group.alb_sg, module.security_group.web_server_sg]
 }
 
-# module "alb" {
-#   source     = "../../modules/alb"
-#   env_prefix = var.env_prefix
+module "alb" {
+  source     = "../../modules/alb"
+  env_prefix = var.env_prefix
 
-#   security_groups = [module.security_group.alb_sg]
-#   subnets         = [module.subnet.public_sub_az1, module.subnet.public_sub_az2]
-# }
-
+  security_groups = [module.security_group.alb_sg]
+  subnets         = [module.subnet.public_sub_az1, module.subnet.public_sub_az2]
+}
 # https://docs.localstack.cloud/references/coverage/coverage_elbv2/
-
-# Elastic Load Balancer v2 (ELB v2) is supported by LocalStack
-# only in the pro version.
+# Elastic Load Balancer v2 (ELB v2) is supported by LocalStack only in the pro version.
 
 module "db" {
   source     = "../../modules/db"
@@ -72,3 +67,5 @@ module "db" {
   # db_sub_group       = module.subnet.db_sub_group
   security_groups = [module.security_group.db_sg]
 }
+# https://docs.localstack.cloud/references/coverage/coverage_rds/#createdbsubnetgroup
+# Relational Database Service (RDS) is supported by LocalStack only in the pro version.

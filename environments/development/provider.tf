@@ -1,8 +1,8 @@
 terraform {
   # backend "s3" {
-  #   bucket  = "chum_bucket"
+  #   bucket  = "chum"
   #   key     = "app_name.tfstate"
-  #   region  = "us-east-1"
+  #   region = "us-east-1"
   #   profile = "terraform_user"
   # }
   required_providers {

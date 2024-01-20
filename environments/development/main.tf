@@ -1,7 +1,7 @@
-# module "s3" { #[bucket, bucket_acl]
-#   source     = "../../modules/s3"
-#   env_prefix = var.env_prefix
-# }
+module "s3" { #[bucket, bucket_acl]
+  source     = "../../modules/s3"
+  env_prefix = var.env_prefix
+}
 
 module "vpc" { # [igw, pub_rt, priv_rt]
   source     = "../../modules/vpc"
@@ -46,7 +46,7 @@ module "web_server" { # [key_pair, ec2's, launch_template]
   security_groups  = [module.security_group.alb_sg, module.security_group.web_server_sg]
 }
 
-module "alb" {
+module "alb" { # [aws_alb]
   source     = "../../modules/alb"
   env_prefix = var.env_prefix
 
@@ -56,7 +56,7 @@ module "alb" {
 # https://docs.localstack.cloud/references/coverage/coverage_elbv2/
 # Elastic Load Balancer v2 (ELB v2) is supported by LocalStack only in the pro version.
 
-module "db" {
+module "db" { # [db_instance]
   source     = "../../modules/db"
   env_prefix = var.env_prefix
 
@@ -81,3 +81,11 @@ module "asg" {
 }
 # https://docs.localstack.cloud/references/coverage/coverage_autoscaling/#createautoscalinggroup
 # Auto Scaling is supported by LocalStack only in the pro version.
+
+module "route_53" { # [oute53_zone, route53_record]
+  source     = "../../modules/route_53"
+  env_prefix = var.env_prefix
+
+  vpc_id = module.vpc.vpc_id
+
+}

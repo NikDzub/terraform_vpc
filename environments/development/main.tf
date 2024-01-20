@@ -33,7 +33,7 @@ module "security_group" { # [alb_sg, ssh_sg]
   my_ip  = var.my_ip
 }
 
-module "web_server" { # [key_pair, ec2's]
+module "web_server" { # [key_pair, ec2's, launch_template]
   source     = "../../modules/web_server"
   env_prefix = var.env_prefix
 
@@ -69,3 +69,15 @@ module "db" {
 }
 # https://docs.localstack.cloud/references/coverage/coverage_rds/#createdbsubnetgroup
 # Relational Database Service (RDS) is supported by LocalStack only in the pro version.
+
+module "asg" {
+  source     = "../../modules/asg"
+  env_prefix = var.env_prefix
+
+  launch_template  = module.web_server.launch_template
+  private_app_subs = [module.subnet.private_app_sub_az1, module.subnet.private_app_sub_az2]
+  # load_balancers   = [module.alb.main]
+  load_balancers = []
+}
+# https://docs.localstack.cloud/references/coverage/coverage_autoscaling/#createautoscalinggroup
+# Auto Scaling is supported by LocalStack only in the pro version.

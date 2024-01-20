@@ -26,7 +26,6 @@ resource "aws_launch_template" "web_server_template" {
   vpc_security_group_ids = [var.security_groups[0].id, var.security_groups[1].id]
 }
 
-
 # todo - add count for az and subnets
 # WEBSERVER PRIVATE APP SUBNET - AZ1
 resource "aws_instance" "web_server" {
